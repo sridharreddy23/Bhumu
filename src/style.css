@@ -357,7 +357,12 @@ p {
   opacity: 1;
   transform: scale(1);
   padding-bottom: 4rem;
-  /* Extra space for the button */
+}
+
+@media (max-width: 600px) {
+  .reveal-section.active {
+    padding-bottom: 5rem; /* Extra space so hug button isn't cut on mobile */
+  }
 }
 
 .btn {
