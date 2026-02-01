@@ -20,13 +20,14 @@ body {
   background: linear-gradient(135deg, #1a0a1f 0%, #2d1b33 100%);
   color: #fff;
   min-height: 100vh;
-  min-height: 100dvh; /* Better mobile viewport (avoids address bar issues) */
+  min-height: 100dvh;
   margin: 0;
   padding: 20px 0;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom)); /* So pic3 + hug button aren't cut on mobile */
   overflow-y: auto;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
-  touch-action: pan-y; /* Explicitly allow vertical touch scrolling */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 html {
@@ -42,7 +43,6 @@ html {
   align-items: center;
   position: relative;
   z-index: 10;
-  pointer-events: auto; /* Clickable even though parent .bg-blobs has pointer-events: none */
 }
 
 /* Background Animations */
@@ -54,7 +54,7 @@ html {
   height: 100%;
   z-index: 1;
   overflow: hidden;
-  pointer-events: none; /* Let touches pass through to scrollable content on mobile */
+  pointer-events: none; /* Background only; touches scroll the page */
 }
 
 .blob {

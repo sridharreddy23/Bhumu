@@ -9,61 +9,63 @@
 </head>
 
 <body>
+  <!-- Fixed background layer (does not affect scroll) -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div id="audio-controls" class="audio-toggle">
       <button id="toggle-music" title="Toggle Music">❤️🔊</button>
     </div>
-
     <audio id="bg-music" loop>
       <source src="/Bhumu.m4a" type="audio/mp4">
     </audio>
+  </div>
 
-    <div id="app">
-      <div class="glass-container interaction-section" id="interaction-card">
-        <h1>Hey Beautiful...</h1>
-        <p id="question-text">I have a very important question to ask you. Are you ready for it?</p>
-        <div class="btn-group">
-          <button class="btn btn-yes" id="yes-btn">YES! ❤️</button>
-        </div>
-      </div>
-
-      <div class="glass-container reveal-section" id="reveal-card">
-        <div class="heart-animation">✨💖✨</div>
-
-        <!-- Counter Section -->
-        <div id="counter" class="time-counter">
-          <p>We've adventured together for:</p>
-          <div class="timer-display">
-            <span id="days">00</span>d <span id="hours">00</span>h <span id="minutes">00</span>m <span
-              id="seconds">00</span>s
-          </div>
-        </div>
-
-        <h1 id="reveal-title"></h1>
-        <p id="reveal-message"></p>
-        <p id="reveal-sub-message" class="sub-message"></p>
-
-        <div class="photo-gallery">
-          <div class="photo-placeholder">
-            <img src="/pic1.jpg" alt="Bhumu 1">
-            <div class="photo-tooltip">The outfit I first saw you in and I instantly fell for you ❤️</div>
-          </div>
-          <div class="photo-placeholder">
-            <img src="/pic2.jpg" alt="Bhumu 2">
-            <div class="photo-tooltip">You are gorgeous, I don't know why am I so lucky to have you ✨</div>
-          </div>
-          <div class="photo-placeholder">
-            <img src="/pic3.jpg" alt="Bhumu 3">
-            <div class="photo-tooltip">The crescent in your forehead looks as perfect as a crescent moon 🌙</div>
-          </div>
-        </div>
-
-        <button id="hug-btn" class="btn btn-hug">SEND A VIRTUAL HUG 🫂</button>
+  <!-- Main content in document flow so body scrolls on mobile -->
+  <div id="app">
+    <div class="glass-container interaction-section" id="interaction-card">
+      <h1>Hey Beautiful...</h1>
+      <p id="question-text">I have a very important question to ask you. Are you ready for it?</p>
+      <div class="btn-group">
+        <button class="btn btn-yes" id="yes-btn">YES! ❤️</button>
       </div>
     </div>
 
-    <script type="module" src="/src/main.ts"></script>
+    <div class="glass-container reveal-section" id="reveal-card">
+      <div class="heart-animation">✨💖✨</div>
+
+      <!-- Counter Section -->
+      <div id="counter" class="time-counter">
+        <p>We've adventured together for:</p>
+        <div class="timer-display">
+          <span id="days">00</span>d <span id="hours">00</span>h <span id="minutes">00</span>m <span
+            id="seconds">00</span>s
+        </div>
+      </div>
+
+      <h1 id="reveal-title"></h1>
+      <p id="reveal-message"></p>
+      <p id="reveal-sub-message" class="sub-message"></p>
+
+      <div class="photo-gallery">
+        <div class="photo-placeholder">
+          <img src="/pic1.jpg" alt="Bhumu 1">
+          <div class="photo-tooltip">The outfit I first saw you in and I instantly fell for you ❤️</div>
+        </div>
+        <div class="photo-placeholder">
+          <img src="/pic2.jpg" alt="Bhumu 2">
+          <div class="photo-tooltip">You are gorgeous, I don't know why am I so lucky to have you ✨</div>
+        </div>
+        <div class="photo-placeholder">
+          <img src="/pic3.jpg" alt="Bhumu 3">
+          <div class="photo-tooltip">The crescent in your forehead looks as perfect as a crescent moon 🌙</div>
+        </div>
+      </div>
+
+      <button id="hug-btn" class="btn btn-hug">SEND A VIRTUAL HUG 🫂</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
 </body>
 
 </html>
