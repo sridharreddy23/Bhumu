@@ -61,6 +61,9 @@ document.addEventListener('mousemove', (e) => {
 });
 
 document.addEventListener('touchstart', (e) => {
+  // Don't create sparkles when tapping buttons – DOM changes here cancel the button's click on mobile
+  const target = e.target as Element;
+  if (target.closest('button') || target.closest('.photo-placeholder')) return;
   const touch = e.touches[0];
   createSparkle(touch.clientX, touch.clientY);
 });
@@ -166,13 +169,19 @@ document.addEventListener('pointerup', (e) => {
 });
 
 // --- VIRTUAL HUG LOGIC ---
+let lastHugAt = 0;
 function onHug() {
+  if (Date.now() - lastHugAt < 400) return; // Debounce: avoid double fire from pointerup + click
+  lastHugAt = Date.now();
   createHearts(30);
   hugBtn.style.transform = 'scale(1.2)';
   setTimeout(() => (hugBtn.style.transform = 'scale(1)'), 200);
 }
-// pointerup fires for both mouse and touch, and works reliably on mobile (click is often suppressed)
 hugBtn.addEventListener('pointerup', (e) => {
+  e.preventDefault();
+  onHug();
+});
+hugBtn.addEventListener('click', (e) => {
   e.preventDefault();
   onHug();
 });
