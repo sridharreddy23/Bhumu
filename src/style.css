@@ -42,6 +42,7 @@ html {
   align-items: center;
   position: relative;
   z-index: 10;
+  pointer-events: auto; /* Clickable even though parent .bg-blobs has pointer-events: none */
 }
 
 /* Background Animations */
