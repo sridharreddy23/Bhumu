@@ -15,6 +15,15 @@
   box-sizing: border-box;
 }
 
+/* Accessibility: visible focus for keyboard users */
+@media (prefers-reduced-motion: no-preference) {
+  .btn:focus-visible,
+  #toggle-music:focus-visible {
+    outline: 2px solid var(--secondary-pink);
+    outline-offset: 3px;
+  }
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(135deg, #1a0a1f 0%, #2d1b33 100%);
@@ -86,9 +95,19 @@ html {
   from {
     transform: translate(0, 0) scale(1);
   }
-
   to {
     transform: translate(100px, 50px) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .floating-element,
+  .sparkle-trail {
+    animation: none;
+  }
+  .blob {
+    transform: translate(50px, 25px) scale(1.05);
   }
 }
 
@@ -262,14 +281,24 @@ p {
   transform: translate(-50%, calc(100% + 15px)) scale(1);
 }
 
+/* Tap to show tooltip on mobile (touch devices) */
+.photo-placeholder.tooltip-open .photo-tooltip {
+  opacity: 1;
+  transform: translate(-50%, calc(100% + 15px)) scale(1);
+}
+.photo-gallery>div:nth-child(3).tooltip-open .photo-tooltip {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 15px)) scale(1);
+}
+
 /* Specific logic for Pic3: Must come AFTER general hover to override it correctly */
-/* This prevents "dragging down" by popping UP instead */
 .photo-gallery>div:nth-child(3) .photo-tooltip {
   bottom: auto;
   top: 0;
 }
 
-.photo-gallery>div:nth-child(3):hover .photo-tooltip {
+.photo-gallery>div:nth-child(3):hover .photo-tooltip,
+.photo-gallery>div:nth-child(3).tooltip-open .photo-tooltip {
   opacity: 1;
   transform: translate(-50%, calc(-100% - 15px)) scale(1);
 }
@@ -287,10 +316,13 @@ p {
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   margin-top: 2rem;
   padding: 1rem 3rem;
+  min-height: 48px; /* Touch target size for mobile */
   box-shadow: 0 4px 20px rgba(106, 17, 203, 0.5);
   font-size: 1.1rem;
   display: inline-block;
   min-width: 250px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* Remove tap flash on mobile */
 }
 
 .btn-hug:hover {

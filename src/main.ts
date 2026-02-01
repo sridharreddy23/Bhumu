@@ -144,11 +144,37 @@ function startCounter() {
   }, 1000);
 }
 
+// --- PHOTO TOOLTIPS ON TAP (mobile) ---
+document.querySelectorAll('.photo-placeholder').forEach((el) => {
+  el.addEventListener('pointerup', (e) => {
+    e.preventDefault();
+    const placeholder = (e.target as Element).closest('.photo-placeholder');
+    if (!placeholder) return;
+    const open = placeholder.classList.toggle('tooltip-open');
+    if (open) {
+      document.querySelectorAll('.photo-placeholder').forEach((other) => {
+        if (other !== placeholder) other.classList.remove('tooltip-open');
+      });
+    }
+  });
+});
+document.addEventListener('pointerup', (e) => {
+  const target = e.target as Node;
+  if (!document.querySelector('.photo-gallery')?.contains(target)) {
+    document.querySelectorAll('.photo-placeholder').forEach((el) => el.classList.remove('tooltip-open'));
+  }
+});
+
 // --- VIRTUAL HUG LOGIC ---
-hugBtn.addEventListener('click', () => {
+function onHug() {
   createHearts(30);
   hugBtn.style.transform = 'scale(1.2)';
-  setTimeout(() => hugBtn.style.transform = 'scale(1)', 200);
+  setTimeout(() => (hugBtn.style.transform = 'scale(1)'), 200);
+}
+// pointerup fires for both mouse and touch, and works reliably on mobile (click is often suppressed)
+hugBtn.addEventListener('pointerup', (e) => {
+  e.preventDefault();
+  onHug();
 });
 
 function createHearts(count: number) {
