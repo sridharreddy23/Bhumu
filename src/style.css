@@ -245,12 +245,17 @@ p {
   border-bottom: 8px solid var(--primary-pink);
 }
 
-/* Special logic for the 3rd image (Crescent) to prevent "dragging down" on mobile */
-/* It will pop UP instead of DOWN */
+/* General Tooltip Hover (Downwards) */
+.photo-placeholder:hover .photo-tooltip {
+  opacity: 1;
+  transform: translate(-50%, calc(100% + 15px)) scale(1);
+}
+
+/* Specific logic for Pic3: Must come AFTER general hover to override it correctly */
+/* This prevents "dragging down" by popping UP instead */
 .photo-gallery>div:nth-child(3) .photo-tooltip {
   bottom: auto;
   top: 0;
-  transform: translate(-50%, 0) scale(0.8);
 }
 
 .photo-gallery>div:nth-child(3):hover .photo-tooltip {
@@ -258,6 +263,7 @@ p {
   transform: translate(-50%, calc(-100% - 15px)) scale(1);
 }
 
+/* Adjust Pic3 Arrow to point DOWN */
 .photo-gallery>div:nth-child(3) .photo-tooltip::after {
   top: auto;
   bottom: -8px;
@@ -265,16 +271,20 @@ p {
   border-top: 8px solid var(--primary-pink);
 }
 
-.photo-placeholder:hover .photo-tooltip {
-  opacity: 1;
-  transform: translate(-50%, calc(100% + 15px)) scale(1);
+/* Virtual Hug Button - Fixed and Bold */
+.btn-hug {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  box-shadow: 0 4px 20px rgba(106, 17, 203, 0.5);
+  font-size: 1.1rem;
+  display: inline-block;
+  min-width: 250px;
 }
 
-/* Virtual Hug Button */
-.btn-hug {
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  margin-top: 1rem;
-  box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
+.btn-hug:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(106, 17, 203, 0.7);
 }
 
 /* Sparkle Trail */
@@ -336,6 +346,8 @@ p {
   align-items: center;
   opacity: 1;
   transform: scale(1);
+  padding-bottom: 4rem;
+  /* Extra space for the button */
 }
 
 .btn {
