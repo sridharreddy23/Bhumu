@@ -208,6 +208,8 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  /* Ensure face/center is always visible */
   border-radius: 11px;
 }
 
@@ -226,12 +228,46 @@ p {
   pointer-events: none;
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 110;
+  line-height: 1.3;
+}
+
+/* Tooltip Arrow */
+.photo-tooltip::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--primary-pink);
+}
+
+/* Special logic for the 3rd image (Crescent) to prevent "dragging down" on mobile */
+/* It will pop UP instead of DOWN */
+.photo-gallery>div:nth-child(3) .photo-tooltip {
+  bottom: auto;
+  top: 0;
+  transform: translate(-50%, 0) scale(0.8);
+}
+
+.photo-gallery>div:nth-child(3):hover .photo-tooltip {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 15px)) scale(1);
+}
+
+.photo-gallery>div:nth-child(3) .photo-tooltip::after {
+  top: auto;
+  bottom: -8px;
+  border-bottom: none;
+  border-top: 8px solid var(--primary-pink);
 }
 
 .photo-placeholder:hover .photo-tooltip {
   opacity: 1;
-  transform: translate(-50%, calc(100% + 10px)) scale(1);
+  transform: translate(-50%, calc(100% + 15px)) scale(1);
 }
 
 /* Virtual Hug Button */
