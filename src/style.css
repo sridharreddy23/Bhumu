@@ -20,16 +20,19 @@ body {
   background: linear-gradient(135deg, #1a0a1f 0%, #2d1b33 100%);
   color: #fff;
   min-height: 100vh;
+  min-height: 100dvh; /* Better mobile viewport (avoids address bar issues) */
   margin: 0;
   padding: 20px 0;
-  /* Ensure scrolling happens */
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
+  touch-action: pan-y; /* Explicitly allow vertical touch scrolling */
 }
 
 html {
-  height: 100%;
-  overflow-y: scroll;
+  min-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #app {
@@ -50,6 +53,7 @@ html {
   height: 100%;
   z-index: 1;
   overflow: hidden;
+  pointer-events: none; /* Let touches pass through to scrollable content on mobile */
 }
 
 .blob {
@@ -96,6 +100,7 @@ html {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s ease;
+  pointer-events: auto; /* Clickable even though parent .bg-blobs has pointer-events: none */
 }
 
 .audio-toggle.visible {
